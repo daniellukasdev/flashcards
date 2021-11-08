@@ -1,8 +1,12 @@
 import React from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link, useRouteMatch, useHistory } from "react-router-dom";
+import { deleteDeck } from "../../utils/api";
+import deleteDeckHandler from "./deleteDeckHandler";
 
 export default function DeckItem({ deck }) {
     const url = useRouteMatch();
+    const history = useHistory();
+    
     
     return (
         <li key={deck.id} className="card" >
@@ -24,7 +28,11 @@ export default function DeckItem({ deck }) {
                         </Link>
                     </div>
                     <div className="d-flex">
-                        <button className="btn btn-danger">
+                        <button onClick={(event) => {
+                            event.preventDefault();
+                            deleteDeckHandler(deck.id);
+                            history.go(0);
+                            }} className="btn btn-danger">
                             <span className="oi oi-trash"></span>
                         </button>
                     </div>
