@@ -19,8 +19,11 @@ export default function Home() {
     console.log(decks)
     return (
         <div>
-            <Link to="/decks/new">Create Deck</Link>
-            <DecksList />
+            <Link to="/decks/new" className="btn btn-secondary">
+                <span className="oi oi-plus mr-1"></span>
+                Create Deck
+            </Link>
+            <DecksList decks={decks} />
         </div>
     );
 }
