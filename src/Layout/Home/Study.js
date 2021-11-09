@@ -26,7 +26,7 @@ export default function Study({ deck, setDeck }) {
     return (
         <div>
             <div>
-                <NavBar deckName={deck.name}/>
+                <NavBar rootName={deck.name} isDeck={true}/>
             </div>
             <div>
                 <h1>{`Study: ${deck.name}`}</h1>

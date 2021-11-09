@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function NavBar({ deckName }) {
+export default function NavBar({ rootName, isDeck = false }) {
     return (
         <nav aria-label="breadcrumb">
             <ol className="breadcrumb">
@@ -11,8 +11,13 @@ export default function NavBar({ deckName }) {
                         Home
                     </Link>
                 </li>
-                <li className="breadcrumb-item"><Link to="/decks">{`${deckName}`}</Link></li>
-                <li className="breadcrumb-item active" aria-current="page">Study</li>
+                {isDeck ? (
+                    (<li className="breadcrumb-item"><Link to="/decks">{`${rootName}`}</Link></li>)
+                    (<li className="breadcrumb-item active" aria-current="page">Study</li>)
+                    ) : (
+                    <li className="breadcrumb-item active" aria-current="page">{`${rootName}`}</li>
+                    
+                    )}
             </ol>
         </nav>
     );

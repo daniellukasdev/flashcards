@@ -4,7 +4,9 @@ import Header from "./Header";
 import NotFound from "./NotFound";
 import Home from "./Home/Home";
 import Study from "./Home/Study";
+import CreateEditDeck from "./Home/CreateEditDeck";
 import AddCard from "./Cards/AddCard";
+
 
 function Layout() {
   const [ deck, setDeck ] = useState([])
@@ -24,11 +26,14 @@ function Layout() {
           <Route exact path="/">
             <Home />
           </Route>
+          <Route path="/decks/new">
+            <CreateEditDeck />
+          </Route>
           <Route path="/decks/:deckId/study">
             <Study deck={deck} setDeck={setDeck} />
           </Route>
           <Route path="/decks/:deckId/cards/new">
-            <AddCard />
+            <AddCard deckName={deck.name}/>
           </Route>
           <Route>
             <NotFound />
