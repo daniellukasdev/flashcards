@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { Switch, Route, useParams } from "react-router-dom";
 import Header from "./Header";
 import NotFound from "./NotFound";
-import { Switch, Route, useParams } from "react-router-dom";
-
 import Home from "./Home/Home";
+import Study from "./Home/Study";
 
 function Layout() {
+  const params = useParams();
+  console.log("params: ", params)
 
-  useEffect(() => {
+  // useEffect(() => {
 
-  }, [])
+  // }, [])
 
   return (
     <>
@@ -19,6 +21,9 @@ function Layout() {
         <Switch>
           <Route exact path="/">
             <Home />
+          </Route>
+          <Route path="/decks/:deckId/study">
+            <Study />
           </Route>
           <Route>
             <NotFound />
