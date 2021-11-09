@@ -16,7 +16,7 @@ export default function Home() {
         
     }, [])
 
-    console.log(decks)
+    //console.log(decks)
     return (
         <div>
             <Link to="/decks/new" className="btn btn-secondary mb-2">

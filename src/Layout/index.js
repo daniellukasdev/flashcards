@@ -4,6 +4,7 @@ import Header from "./Header";
 import NotFound from "./NotFound";
 import Home from "./Home/Home";
 import Study from "./Home/Study";
+import AddCard from "./Cards/AddCard";
 
 function Layout() {
   const params = useParams();
@@ -24,6 +25,9 @@ function Layout() {
           </Route>
           <Route path="/decks/:deckId/study">
             <Study />
+          </Route>
+          <Route path="/decks/:deckId/cards/new">
+            <AddCard />
           </Route>
           <Route>
             <NotFound />
