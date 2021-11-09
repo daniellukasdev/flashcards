@@ -1,35 +1,39 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import NotEnoughCards from "./NotEnoughCards";
+import { useParams, useHistory } from "react-router-dom";
+//import NotEnoughCards from "./NotEnoughCards";
 
-export default function Card({ cards = [] }) {
+export default function Card({ cards = [], deck }) {
     const [ currentCard, setCurrentCard ] = useState(0);
     const [ cardFront, setCardFront ] = useState(true)
+    const history = useHistory();
 
-    const { deckId } = useParams();
-    console.log("params: ", deckId)
+    //const { deckId } = useParams();
+    //console.log("params: ", deckId)
 
     // if there are two or fewer cards, display the following instead
-    if (cards.length <= 2) {
-        return (
-            <NotEnoughCards deckId={deckId} cards={cards} />
-        );
-    }
+    // if (cards.length <= 2) {
+    //     return (
+    //         <NotEnoughCards deckId={deckId} cards={cards} deck={deck} />
+    //     );
+    // }
 
     function flipBtnHandler(event) {
+        //event.preventDefault();
         setCardFront(!cardFront)
     }
 
     function nextBtnHandler(event) {
-        console.log(event.target)
+        //event.preventDefault();
         if (currentCard + 1 < cards.length) {
             setCurrentCard(currentCard + 1);
             setCardFront(!cardFront);
         } else {
-            const restart = window.confirm("Restart cards?");
+            const restart = window.confirm("Restart cards\n \nClick 'cancel' to return to the home page?");
             if (restart) {
                 setCurrentCard(0);
                 setCardFront(true);
+            } else {
+                history.push("/");
             }
         }
     }
@@ -37,7 +41,6 @@ export default function Card({ cards = [] }) {
     return (
         <div className="card">
             <div className="card-body">
-                {/* <p>{cards.length}</p> */}
                 <div className="card-title">
                     <h4>{`Card ${currentCard + 1} of ${cards.length}`}</h4>
                 </div>

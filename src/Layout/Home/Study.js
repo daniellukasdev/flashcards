@@ -3,10 +3,11 @@ import { useParams } from "react-router";
 import { readDeck } from "../../utils/api";
 import NavBar from "./NavBar";
 import Card from "../Cards/Card";
+import NotEnoughCards from "../Cards/NotEnoughCards";
 
 
-export default function Study() {
-    const [ deck, setDeck ] = useState([])
+export default function Study({ deck, setDeck }) {
+    
     const { deckId } = useParams();
     //console.log("params deckId: ", deckId)
 
@@ -16,7 +17,7 @@ export default function Study() {
             setDeck(deckFromAPI);
         };
         loadDeck();
-    }, [deckId])
+    }, [deckId, setDeck])
     
     
     // const cards = deck.cards.map(card => card);
@@ -30,8 +31,10 @@ export default function Study() {
             <div>
                 <h1>{`Study: ${deck.name}`}</h1>
             </div>
-            {/* Card should probably only take in a single card and not the array */}
-            <Card cards={deck.cards} />
+            {deck.cards?.length > 2 ? (<Card cards={deck.cards} deck={deck} />
+            ) : (
+            <NotEnoughCards deckId={deckId} cards={deck.cards} deck={deck} />
+            )}   
         </div>
     );
 }

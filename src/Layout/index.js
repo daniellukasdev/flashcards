@@ -7,6 +7,7 @@ import Study from "./Home/Study";
 import AddCard from "./Cards/AddCard";
 
 function Layout() {
+  const [ deck, setDeck ] = useState([])
   const params = useParams();
   console.log("params: ", params)
 
@@ -24,7 +25,7 @@ function Layout() {
             <Home />
           </Route>
           <Route path="/decks/:deckId/study">
-            <Study />
+            <Study deck={deck} setDeck={setDeck} />
           </Route>
           <Route path="/decks/:deckId/cards/new">
             <AddCard />
