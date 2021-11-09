@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import NotEnoughCards from "./NotEnoughCards";
 
 export default function Card({ cards = [] }) {
     const [ currentCard, setCurrentCard ] = useState(0);
@@ -8,27 +9,14 @@ export default function Card({ cards = [] }) {
     const { deckId } = useParams();
     console.log("params: ", deckId)
 
+    // if there are two or fewer cards, display the following instead
     if (cards.length <= 2) {
         return (
-            <div>
-                <div>
-                    <h2>Not enough cards.</h2>
-                </div>
-                <div>
-                    <p>You need at least 3 cards to study. Ther are {cards.length} cards this deck.</p>
-                </div>
-                <div>
-                <Link to={`/decks/${deckId}/cards/new`} className="btn btn-primary ml-1">
-                    <span className="oi oi-plus mr-1"></span>
-                    Add Cards
-                </Link>
-                </div>
-            </div>
+            <NotEnoughCards deckId={deckId} cards={cards} />
         );
     }
 
     function flipBtnHandler(event) {
-        //console.log()
         setCardFront(!cardFront)
     }
 
@@ -46,8 +34,6 @@ export default function Card({ cards = [] }) {
         }
     }
 
-    
-    // switch and route to change card
     return (
         <div className="card">
             <div className="card-body">
