@@ -16,10 +16,6 @@ function Layout() {
   const params = useParams();
   console.log("params: ", params)
 
-  // useEffect(() => {
-
-  // }, [])
-
   return (
     <>
       <Header />
@@ -32,7 +28,7 @@ function Layout() {
           <Route path="/decks/new">
             <CreateEditDeck decks={decks} deck={deck} setDeck={setDeck} />
           </Route>
-          <Route path="/decks/:deckId">
+          <Route exact path="/decks/:deckId">
             <Deck deck={deck}/>
           </Route>
           <Route path="/decks/:deckId/study">
