@@ -13,6 +13,7 @@ function Layout() {
   // create state for decks
   const [ decks, setDecks ] = useState([]);
   const [ deck, setDeck ] = useState([])
+  const [ isDeck, setIsDeck ] = useState(false);
   const params = useParams();
   console.log("params: ", params)
 
@@ -26,16 +27,16 @@ function Layout() {
             <Home decks={decks} setDecks={setDecks} />
           </Route>
           <Route path="/decks/new">
-            <CreateEditDeck decks={decks} deck={deck} setDeck={setDeck} />
-          </Route>
-          <Route exact path="/decks/:deckId">
-            <Deck deck={deck}/>
+            <CreateEditDeck decks={decks} deck={deck} setDeck={setDeck} isDeck={isDeck} setIsDeck={setIsDeck} />
           </Route>
           <Route path="/decks/:deckId/study">
-            <Study deck={deck} setDeck={setDeck} />
+            <Study deck={deck} setDeck={setDeck} isDeck={isDeck} setIsDeck={setIsDeck} />
           </Route>
           <Route path="/decks/:deckId/cards/new">
-            <AddCard deckName={deck.name}/>
+            <AddCard deckName={deck.name} isDeck={isDeck} setIsDeck={setIsDeck} />
+          </Route>
+          <Route path="/decks/:deckId">
+            <Deck deck={deck} setDeck={setDeck} isDeck={isDeck} setIsDeck={setIsDeck} />
           </Route>
           <Route>
             <NotFound />

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 //import NotEnoughCards from "./NotEnoughCards";
 
-export default function Card({ cards = [], deck }) {
+export default function StudyCards({ cards = [], deck }) {
     const [ currentCard, setCurrentCard ] = useState(0);
     const [ cardFront, setCardFront ] = useState(true)
     const history = useHistory();

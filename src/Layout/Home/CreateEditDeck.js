@@ -1,41 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import NavBar from "./NavBar";
 import { createDeck, readDeck } from "../../utils/api";
 
-export default function CreateDeck({ decks, deck, setDeck }) {
+export default function CreateEditDeck({ decks, deck, setDeck, isDeck, setIsDeck }) {
+    setIsDeck(true)
     const [ deckName, setDeckName ] = useState("");
     const [ description, setDescription ] = useState("");
-
     const history = useHistory();
 
+    const newDeck = {
+        // id: (decks?.length + 1),
+        name: deckName,
+        description: description,
+    }
+    
     function handleCancelBtn() {
         history.push("/");
     }
 
     const handleInputChange = (event) => setDeckName(event.target.value);
     const handleTextAreaChange = (event) => setDescription(event.target.value);
+
     async function handleSubmit(event) {
         event.preventDefault();
-        console.log("before: ", deckName, description);
-        
-        const newDeck = {
-            id: (decks?.length + 1),
-            name: deckName,
-            description: description,
-        }
-        const addToDecks = await createDeck(newDeck);
-        console.log("addToDecks :", addToDecks)
-        // setDeckName("");
-        // setDescription("");
-        history.push(`/decks/${newDeck.id}`);
-        console.log("after:", deckName, description, newDeck.id);
-        
+        const response = await createDeck(newDeck);
+        history.push(`/decks/${response.id}`);
+
     }
     return (
         <div>
             <div>
-                <NavBar rootName={"Create Deck"} deck={deck} setDeck={setDeck} />
+                <NavBar rootName={"Create Deck"} deck={deck} setDeck={setDeck} isDeck={isDeck} setIsDeck={setIsDeck} />
             </div>
             <div>
                 <h1>Create Deck</h1>

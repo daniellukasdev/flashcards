@@ -20,7 +20,7 @@ export default function DeckItem({ deck }) {
                 <p className="card-text">{deck.description}</p>
                 <div className="d-flex flex-row justify-content-between">
                     <div className="d-flex">
-                        <Link to={`decks/${deck.id}`} 
+                        <Link to={`/decks/${deck.id}`} 
                             className="btn btn-secondary mr-2">
                             <span className="oi oi-eye mr-1"></span>View
                         </Link>

@@ -7,23 +7,23 @@ import StudyBtn from "../Buttons/StudyBtn";
 import AddCardsBtn from "../Buttons/AddCardsBtn";
 import DeleteBtn from "../Buttons/DeleteBtn";
 
-export default function Deck({ deck, setDeck }) {
+export default function Deck({ deck, setDeck, isDeck, setIsDeck }) {
     const { deckId } = useParams();
     
-    // useEffect(() => {
-    //     async function loadDeck() {
-    //         const deckFromAPI = await readDeck(deckId);
-    //         setDeck(deckFromAPI);
-    //     };
-    //     loadDeck();
-    // }, [deckId, setDeck])
+    useEffect(() => {
+        async function loadDeck() {
+            const deckFromAPI = await readDeck(deckId);
+            setDeck(deckFromAPI);
+        };
+        loadDeck();
+    }, [deckId, setDeck])
 
 
 
     return (
         <div>
             <div>
-                <NavBar rootName={deck.name} isDeck={true} />
+                <NavBar rootName={deck.name} isDeck={isDeck} setIsDeck={setIsDeck} />
             </div>
             <div>
                 <div>
