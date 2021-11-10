@@ -6,9 +6,11 @@ import EditBtn from "../Buttons/EditBtn";
 import StudyBtn from "../Buttons/StudyBtn";
 import AddCardsBtn from "../Buttons/AddCardsBtn";
 import DeleteBtn from "../Buttons/DeleteBtn";
+import CardsList from "../Cards/CardsList";
 
 export default function Deck({ deck, setDeck, isDeck, setIsDeck }) {
     const { deckId } = useParams();
+    let cards = [];
     
     useEffect(() => {
         async function loadDeck() {
@@ -18,7 +20,16 @@ export default function Deck({ deck, setDeck, isDeck, setIsDeck }) {
         loadDeck();
     }, [deckId, setDeck])
 
-
+    if (deck?.cards?.length > 0) {
+        cards = [
+            <div>
+                    <h3>Cards</h3>
+            </div>,
+            <div>
+                <CardsList cards={deck.cards}/>
+            </div>,
+        ]
+    }
 
     return (
         <div>
@@ -42,6 +53,9 @@ export default function Deck({ deck, setDeck, isDeck, setIsDeck }) {
                         <DeleteBtn />
                     </div>
                 </div>
+            </div>
+            <div>
+                {cards}
             </div>
         </div>
     );

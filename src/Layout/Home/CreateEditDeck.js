@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import NavBar from "./NavBar";
 import { createDeck, readDeck } from "../../utils/api";
 
-export default function CreateEditDeck({ decks, deck, setDeck, isDeck, setIsDeck }) {
+export default function CreateEditDeck({ decks, deck, setDeck, isDeck, setIsDeck , edit = false }) {
     setIsDeck(true)
     const [ deckName, setDeckName ] = useState("");
     const [ description, setDescription ] = useState("");
@@ -31,7 +31,7 @@ export default function CreateEditDeck({ decks, deck, setDeck, isDeck, setIsDeck
     return (
         <div>
             <div>
-                <NavBar rootName={"Create Deck"} deck={deck} setDeck={setDeck} isDeck={isDeck} setIsDeck={setIsDeck} />
+                <NavBar rootName={edit ? "Edit Deck" : "Create Deck"} deck={deck} setDeck={setDeck} isDeck={isDeck} setIsDeck={setIsDeck} />
             </div>
             <div>
                 <h1>Create Deck</h1>
