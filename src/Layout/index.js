@@ -5,10 +5,13 @@ import NotFound from "./NotFound";
 import Home from "./Home/Home";
 import Study from "./Home/Study";
 import CreateEditDeck from "./Home/CreateEditDeck";
+import Deck from "./Home/Deck";
 import AddCard from "./Cards/AddCard";
 
 
 function Layout() {
+  // create state for decks
+  const [ decks, setDecks ] = useState([]);
   const [ deck, setDeck ] = useState([])
   const params = useParams();
   console.log("params: ", params)
@@ -24,10 +27,13 @@ function Layout() {
         {/* TODO: Implement the screen starting here */}
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Home decks={decks} setDecks={setDecks} />
           </Route>
           <Route path="/decks/new">
             <CreateEditDeck />
+          </Route>
+          <Route path="/decks/:deckId">
+            <Deck deck={deck}/>
           </Route>
           <Route path="/decks/:deckId/study">
             <Study deck={deck} setDeck={setDeck} />

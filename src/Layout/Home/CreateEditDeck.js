@@ -1,11 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import NavBar from "./NavBar";
+import { createDeck } from "../../utils/api";
 
-export default function CreateDeck() {
+export default function CreateDeck({ decks }) {
+    const [ deckName, setDeckName ] = useState("");
+    const [ description, setDescription ] = useState("");
+
     const history = useHistory();
+
     function handleCancelBtn() {
         history.push("/");
+    }
+
+    const handleInputChange = (event) => setDeckName(event.target.value);
+    const handleTextAreaChange = (event) => setDescription(event.target.value);
+    function handleSubmit(event) {
+        event.preventDefault();
+        console.log("before: ", deckName, description);
+        const newDeck = {
+            id: (decks?.length + 1),
+            name: deckName,
+            description: description,
+        }
+        const addToDecks = async () => {
+            const added = await createDeck(newDeck);
+            return added;
+        }
+        console.log("addToDecks :", addToDecks)
+        setDeckName("");
+        setDescription("");
+        history.push(`/decks/${newDeck?.id}`);
+        console.log("after:", deckName, description);
+        
     }
     return (
         <div>
@@ -16,7 +43,7 @@ export default function CreateDeck() {
                 <h1>Create Deck</h1>
             </div>
             <div>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label for="deckName">Name</label>
                         <input 
@@ -24,6 +51,8 @@ export default function CreateDeck() {
                             className="form-control" 
                             id="deckName" 
                             name="deckName"
+                            value={deckName}
+                            onChange={handleInputChange}
                             placeholder="Deck Name">
                         </input>
                     </div>
@@ -34,6 +63,8 @@ export default function CreateDeck() {
                             id="description" 
                             rows="4"
                             name="description"
+                            value={description}
+                            onChange={handleTextAreaChange}
                             placeholder="Brief description of the deck">
                         </textarea>
                     </div>
