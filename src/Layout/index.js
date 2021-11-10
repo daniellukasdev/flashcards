@@ -14,8 +14,8 @@ function Layout() {
   const [ decks, setDecks ] = useState([]);
   const [ deck, setDeck ] = useState([])
   // const [ isDeck, setIsDeck ] = useState(false);
-  const params = useParams();
-  console.log("params: ", params)
+  // const params = useParams();
+  // console.log("params: ", params)
 
   return (
     <>
@@ -36,7 +36,7 @@ function Layout() {
             <CreateEditDeck deck={deck} setDeck={setDeck} edit={true} />
           </Route>
           <Route path="/decks/:deckId/cards/new">
-            <AddEditCard deckName={deck.name} />
+            <AddEditCard deckId={deck.id} deck={deck} setDeck={setDeck} />
           </Route>
           <Route path="/decks/:deckId">
             <Deck deck={deck} setDeck={setDeck} />

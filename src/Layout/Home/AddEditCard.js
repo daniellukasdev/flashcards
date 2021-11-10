@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import NavBar from "./NavBar";
-import { createCard, updateCard } from "../../utils/api";
+import { readDeck, createCard, updateCard } from "../../utils/api";
 
-export default function AddEditCard({ deck, setDeck, isDeck = true , edit = false }) {
-
+export default function AddEditCard({ deckId, deck, setDeck, isDeck = true , edit = false }) {
     const [ card, setCard ] = useState({});
     const [ cardFront, setcardFront ] = useState("");
     const [ cardBack, setCardBack ] = useState("");
+    //const { deckId } = useParams();
+    //console.log("params from Add: ", deckId)
     const history = useHistory();
 
-    // useEffect(() => {
-    //     async function loadDeck() {
-    //         const deckFromAPI = await readDeck(deckId);
-    //         setDeck(deckFromAPI);
-    //     };
-    //     loadDeck();
-    // }, [deckId, setDeck])
+    useEffect(() => {
+        async function loadDeck() {
+            const deckFromAPI = await readDeck(deckId);
+            setDeck(deckFromAPI);
+        };
+        loadDeck();
+    }, [deckId, setDeck])
 
     const newCard = {
-        // id: (decks?.length + 1),
         front: cardFront,
         back: cardBack,
     }
@@ -30,7 +30,7 @@ export default function AddEditCard({ deck, setDeck, isDeck = true , edit = fals
         back: cardBack,
     }
     
-    function handleCancelBtn() {
+    function handleDoneBtn() {
         if (edit) history.go(-1);
         history.push("/");
     }
@@ -38,14 +38,14 @@ export default function AddEditCard({ deck, setDeck, isDeck = true , edit = fals
     const handleFrontChange = (event) => setcardFront(event.target.value);
     const handleBackChange = (event) => setCardBack(event.target.value);
 
-    async function handleSubmit(event) {
+    async function handleSave(event) {
         event.preventDefault();
         if(!edit){
-            const response = await createCard(newCard);
-            history.push(`/decks/${response.id}`);
+            const response = await createCard(deckId, newCard);
+            setcardFront("");
+            setCardBack("");
         } else {
             const response = await updateCard(cardUpdate);
-            history.go(-1);
         }
 
     }
@@ -53,17 +53,17 @@ export default function AddEditCard({ deck, setDeck, isDeck = true , edit = fals
         <div>
             <div>
                 <NavBar 
-                rootName={edit ? "Edit Deck" : "Create Deck"} 
+                rootName={`${deck?.name}`} 
                 deck={deck} 
                 setDeck={setDeck} 
                 isDeck={isDeck} 
                 />
             </div>
             <div>
-                <h1>{edit ? "Edit Deck" : "Create Deck"}</h1>
+                <h2>{edit ? `${deck.name}: Edit Card` : `${deck.name}: Add Card`}</h2>
             </div>
             <div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSave}>
                     <div className="form-group">
                         <label for="cardFront">Front</label>
                         <textarea 
@@ -91,9 +91,9 @@ export default function AddEditCard({ deck, setDeck, isDeck = true , edit = fals
                     <div>
                         <button onClick={(event) => {
                             event.preventDefault();
-                            handleCancelBtn();
-                        }}className="btn btn-secondary mr-1">Cancel</button>
-                        <button type="submit" className="btn btn-primary ml-1">Submit</button>
+                            handleDoneBtn();
+                        }}className="btn btn-secondary mr-1">Done</button>
+                        <button type="submit" className="btn btn-primary ml-1">Save</button>
                     </div>
                 </form>
             </div>
