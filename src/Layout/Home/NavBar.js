@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { readDeck } from "../../utils/api";
 
-export default function NavBar({ rootName, isDeck, setIsDeck, study=false }) {
+export default function NavBar({ rootName, isDeck, study=false }) {
     const { deckId } = useParams();
     console.log("params in nav: ", deckId)
 

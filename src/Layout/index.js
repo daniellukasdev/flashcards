@@ -6,14 +6,14 @@ import Home from "./Home/Home";
 import Study from "./Home/Study";
 import CreateEditDeck from "./Home/CreateEditDeck";
 import Deck from "./Home/Deck";
-import AddCard from "./Cards/AddCard";
+import AddEditCard from "./Home/AddEditCard";
 
 
 function Layout() {
   // create state for decks
   const [ decks, setDecks ] = useState([]);
   const [ deck, setDeck ] = useState([])
-  const [ isDeck, setIsDeck ] = useState(false);
+  // const [ isDeck, setIsDeck ] = useState(false);
   const params = useParams();
   console.log("params: ", params)
 
@@ -27,16 +27,19 @@ function Layout() {
             <Home decks={decks} setDecks={setDecks} />
           </Route>
           <Route path="/decks/new">
-            <CreateEditDeck decks={decks} deck={deck} setDeck={setDeck} isDeck={isDeck} setIsDeck={setIsDeck} />
+            <CreateEditDeck deck={deck} setDeck={setDeck} />
           </Route>
           <Route path="/decks/:deckId/study">
-            <Study deck={deck} setDeck={setDeck} isDeck={isDeck} setIsDeck={setIsDeck} />
+            <Study deck={deck} setDeck={setDeck} />
+          </Route>
+          <Route path="/decks/:deckId/edit">
+            <CreateEditDeck deck={deck} setDeck={setDeck} edit={true} />
           </Route>
           <Route path="/decks/:deckId/cards/new">
-            <AddCard deckName={deck.name} isDeck={isDeck} setIsDeck={setIsDeck} />
+            <AddEditCard deckName={deck.name} />
           </Route>
           <Route path="/decks/:deckId">
-            <Deck deck={deck} setDeck={setDeck} isDeck={isDeck} setIsDeck={setIsDeck} />
+            <Deck deck={deck} setDeck={setDeck} />
           </Route>
           <Route>
             <NotFound />

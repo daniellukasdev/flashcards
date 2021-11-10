@@ -11,7 +11,7 @@ import CardsList from "../Cards/CardsList";
 export default function Deck({ deck, setDeck, isDeck, setIsDeck }) {
     const { deckId } = useParams();
     let cards = [];
-    
+
     useEffect(() => {
         async function loadDeck() {
             const deckFromAPI = await readDeck(deckId);
@@ -45,8 +45,8 @@ export default function Deck({ deck, setDeck, isDeck, setIsDeck }) {
                 </div>
                 <div className="d-flex flex-row justify-content-between">
                     <div className="d-flex">
-                        <EditBtn />
-                        <StudyBtn />
+                        <EditBtn deckId={deck.id}/>
+                        <StudyBtn deckId={deckId}/>
                         <AddCardsBtn />
                     </div>
                     <div className="d-flex">

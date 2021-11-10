@@ -6,8 +6,8 @@ import StudyCards from "../Cards/StudyCards";
 import NotEnoughCards from "../Cards/NotEnoughCards";
 
 
-export default function Study({ deck, setDeck, isDeck, setIsDeck }) {
-    setIsDeck(true);
+export default function Study({ deck, setDeck, isDeck = true }) {
+    // setIsDeck(true);
     const { deckId } = useParams();
     //console.log("params deckId: ", deckId)
 
@@ -26,7 +26,12 @@ export default function Study({ deck, setDeck, isDeck, setIsDeck }) {
     return (
         <div>
             <div>
-                <NavBar rootName={deck.name} isDeck={isDeck} setIsDeck={setIsDeck} study={true} deck={deck} setDeck={setDeck} />
+                <NavBar 
+                rootName={deck.name} 
+                isDeck={isDeck}  
+                study={true} 
+                deck={deck} 
+                setDeck={setDeck} />
             </div>
             <div>
                 <h1>{`Study: ${deck.name}`}</h1>

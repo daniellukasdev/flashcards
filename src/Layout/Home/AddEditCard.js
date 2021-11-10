@@ -1,23 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import NavBar from "./NavBar";
-import { createDeck, updateDeck } from "../../utils/api";
+import { createCard, updateCard } from "../../utils/api";
 
-export default function CreateEditDeck({ deck, setDeck, isDeck = true, edit = false }) {
-    const [ deckName, setDeckName ] = useState("");
-    const [ description, setDescription ] = useState("");
+export default function AddEditCard({ deck, setDeck, isDeck = true , edit = false }) {
+
+    const [ card, setCard ] = useState({});
+    const [ cardFront, setcardFront ] = useState("");
+    const [ cardBack, setCardBack ] = useState("");
     const history = useHistory();
 
-    const newDeck = {
+    // useEffect(() => {
+    //     async function loadDeck() {
+    //         const deckFromAPI = await readDeck(deckId);
+    //         setDeck(deckFromAPI);
+    //     };
+    //     loadDeck();
+    // }, [deckId, setDeck])
+
+    const newCard = {
         // id: (decks?.length + 1),
-        name: deckName,
-        description: description,
+        front: cardFront,
+        back: cardBack,
     }
 
-    const deckUpdate = {
-        id: deck.id,
-        name: deckName,
-        description: description,
+    const cardUpdate = {
+        id: card.id,
+        front: cardFront,
+        back: cardBack,
     }
     
     function handleCancelBtn() {
@@ -25,16 +35,16 @@ export default function CreateEditDeck({ deck, setDeck, isDeck = true, edit = fa
         history.push("/");
     }
 
-    const handleInputChange = (event) => setDeckName(event.target.value);
-    const handleTextAreaChange = (event) => setDescription(event.target.value);
+    const handleFrontChange = (event) => setcardFront(event.target.value);
+    const handleBackChange = (event) => setCardBack(event.target.value);
 
     async function handleSubmit(event) {
         event.preventDefault();
         if(!edit){
-            const response = await createDeck(newDeck);
+            const response = await createCard(newCard);
             history.push(`/decks/${response.id}`);
         } else {
-            const response = await updateDeck(deckUpdate);
+            const response = await updateCard(cardUpdate);
             history.go(-1);
         }
 
@@ -55,27 +65,27 @@ export default function CreateEditDeck({ deck, setDeck, isDeck = true, edit = fa
             <div>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label for="deckName">Name</label>
-                        <input 
+                        <label for="cardFront">Front</label>
+                        <textarea 
                             type="text" 
                             className="form-control" 
-                            id="deckName" 
-                            name="deckName"
-                            value={deckName}
-                            onChange={handleInputChange}
-                            placeholder={edit ? `${deck.name}` : "Deck Name"}>
-                        </input>
+                            id="cardFront" 
+                            name="cardFront"
+                            value={cardFront}
+                            onChange={handleFrontChange}
+                            placeholder={edit ? `${card.front}` : "Front side of card"}>
+                        </textarea>
                     </div>
                     <div className="form-group">
-                        <label for="description">Description</label>
+                        <label for="cardBack">Back</label>
                         <textarea 
                             className="form-control" 
-                            id="description" 
+                            id="cardBack" 
                             rows="4"
-                            name="description"
-                            value={description}
-                            onChange={handleTextAreaChange}
-                            placeholder={edit ? `${deck.description}` : "Brief description of the deck"}>
+                            name="cardBack"
+                            value={cardBack}
+                            onChange={handleBackChange}
+                            placeholder={edit ? `${card.back}` : "Back side of card"}>
                         </textarea>
                     </div>
                     <div>
