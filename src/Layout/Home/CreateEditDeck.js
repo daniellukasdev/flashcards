@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import NavBar from "./NavBar";
-import { createDeck } from "../../utils/api";
+import { createDeck, readDeck } from "../../utils/api";
 
-export default function CreateDeck({ decks }) {
+export default function CreateDeck({ decks, deck, setDeck }) {
     const [ deckName, setDeckName ] = useState("");
     const [ description, setDescription ] = useState("");
 
@@ -15,23 +15,21 @@ export default function CreateDeck({ decks }) {
 
     const handleInputChange = (event) => setDeckName(event.target.value);
     const handleTextAreaChange = (event) => setDescription(event.target.value);
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
         console.log("before: ", deckName, description);
+        
         const newDeck = {
             id: (decks?.length + 1),
             name: deckName,
             description: description,
         }
-        const addToDecks = async () => {
-            const added = await createDeck(newDeck);
-            return added;
-        }
+        const addToDecks = await createDeck(newDeck);
         console.log("addToDecks :", addToDecks)
-        setDeckName("");
-        setDescription("");
-        history.push(`/decks/${newDeck?.id}`);
-        console.log("after:", deckName, description);
+        // setDeckName("");
+        // setDescription("");
+        history.push(`/decks/${newDeck.id}`);
+        console.log("after:", deckName, description, newDeck.id);
         
     }
     return (
