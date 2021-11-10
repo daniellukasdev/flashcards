@@ -13,7 +13,7 @@ export default function Home({ decks, setDecks }) {
         }
         loadDecks();
         
-    }, [])
+    }, [setDecks])
 
     //console.log(decks)
     return (

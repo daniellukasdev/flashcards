@@ -35,7 +35,7 @@ export default function CreateDeck({ decks, deck, setDeck }) {
     return (
         <div>
             <div>
-                <NavBar rootName={"Create Deck"} />
+                <NavBar rootName={"Create Deck"} deck={deck} setDeck={setDeck} />
             </div>
             <div>
                 <h1>Create Deck</h1>

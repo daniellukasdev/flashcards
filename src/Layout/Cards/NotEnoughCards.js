@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import AddCardsBtn from "../Buttons/AddCardsBtn";
 
 export default function NotEnoughCards( { cards = [], deck = [] }) {
     console.log("deck: ", deck)
@@ -12,10 +12,7 @@ export default function NotEnoughCards( { cards = [], deck = [] }) {
                 <p>You need at least 3 cards to study. Ther are {cards.length} cards this deck.</p>
             </div>
             <div>
-                <Link to={`/decks/${deck.id}/cards/new`} className="btn btn-primary ml-1">
-                    <span className="oi oi-plus mr-1"></span>
-                    Add Cards
-                </Link>
+                <AddCardsBtn deckId={deck.id} />
             </div>
         </div>
     );

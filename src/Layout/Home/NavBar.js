@@ -1,9 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { readDeck } from "../../utils/api";
 
-export default function NavBar({ rootName, isDeck = false }) {
+export default function NavBar({ rootName, isDeck = false, study=false, deck, setDeck }) {
+    const { deckId } = useParams();
+    console.log("params in nav: ", deckId)
+
+    
+
+
+
     let navItems = <li className="breadcrumb-item"><Link></Link></li>
-    if (isDeck) {
+    if (isDeck && study) {
         navItems = [
         <li className="breadcrumb-item"><Link to="/decks">{`${rootName}`}</Link></li>,
         <li className="breadcrumb-item active" aria-current="page">Study</li>
