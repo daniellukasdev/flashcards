@@ -43,7 +43,7 @@ export default function Deck({ deck, setDeck, isDeck, setIsDeck }) {
             <div>
                 <NavBar rootName={deck.name} isDeck={isDeck} setIsDeck={setIsDeck} />
             </div>
-            <div>
+            <div className="mb-2">
                 <div>
                     <h5>{deck.name}</h5>
                 </div>
@@ -61,7 +61,7 @@ export default function Deck({ deck, setDeck, isDeck, setIsDeck }) {
                     </div>
                 </div>
             </div>
-            <div>
+            <div className="mt-4">
                 {cards}
             </div>
         </div>
