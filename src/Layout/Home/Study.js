@@ -7,8 +7,11 @@ import NotEnoughCards from "../Cards/NotEnoughCards";
 
 
 export default function Study({ deck, setDeck, isDeck = true }) {
+    // gets deck id from url params
     const { deckId } = useParams();
 
+    /* uses deck id from params to read the deck, 
+    then updates end dependencies change */
     useEffect(() => {
         async function loadDeck() {
             const deckFromAPI = await readDeck(deckId);
@@ -17,6 +20,8 @@ export default function Study({ deck, setDeck, isDeck = true }) {
         loadDeck();
     }, [deckId, setDeck])
 
+    /* renders deck information with cards if there are more than two cards in the deck,
+    otherwise it will display the not enough cards message */
     return (
         <div>
             <div>

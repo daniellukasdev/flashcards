@@ -10,7 +10,7 @@ import AddEditCard from "./Home/AddEditCard";
 
 
 function Layout() {
-  // create state for decks
+  // create states for decks and decks
   const [ decks, setDecks ] = useState([]);
   const [ deck, setDeck ] = useState([])
 

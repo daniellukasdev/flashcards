@@ -5,9 +5,12 @@ import CardForm from "../Cards/CardForm";
 import { readDeck, readCard } from "../../utils/api";
 
 export default function AddEditCard({ deck, setDeck, edit = false }) {
+    // creates states for card
     const [ card, setCard ] = useState({});
+    // gets deck and card id from url params
     const { deckId, cardId } = useParams();
 
+    /* loads the deck with the id from params */
     useEffect(() => {
         async function loadDeck() {
             const deckFromAPI = await readDeck(deckId);
@@ -16,6 +19,7 @@ export default function AddEditCard({ deck, setDeck, edit = false }) {
         loadDeck();
     }, [deckId, setDeck])
     
+    /* if editing, loads the card with the card id from params */
     useEffect(() => {
         if (edit) {
             async function loadCard() {
@@ -26,6 +30,7 @@ export default function AddEditCard({ deck, setDeck, edit = false }) {
         }  
     }, [cardId, edit])
 
+    /* displays add or edit page depending on what button was pressed */
     return (
         <div>
             <div>

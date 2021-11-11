@@ -2,6 +2,7 @@ import React from "react";
 import AddCardsBtn from "../Buttons/AddCardsBtn";
 
 export default function NotEnoughCards( { cards = [], deck = [] }) {
+    /* this is displayed if the deck has 2 cards or fewer */
     return (
         <div>
             <div>

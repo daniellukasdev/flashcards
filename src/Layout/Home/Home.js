@@ -4,15 +4,13 @@ import { listDecks } from "../../utils/api";
 import DecksList from "../Decks/DecksList";
 
 export default function Home({ decks, setDecks }) {
-    
-
+    // load the decks by setting the state
     useEffect(() => {
         async function loadDecks() {
             const loadedDecks = await listDecks();
             setDecks(loadedDecks);
         }
         loadDecks();
-        
     }, [setDecks])
 
     return (

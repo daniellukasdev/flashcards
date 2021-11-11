@@ -9,9 +9,14 @@ import DeleteBtn from "../Buttons/DeleteBtn";
 import CardsList from "../Cards/CardsList";
 
 export default function Deck({ deck, setDeck, isDeck, setIsDeck }) {
+    // gets deck id from url params
     const { deckId } = useParams();
+
+    /* declares an empty array to store cards in 
+    and is used to render them if they exist */
     let cards = [];
 
+    // reads the deck based on the url params
     useEffect(() => {
         async function loadDeck() {
             const deckFromAPI = await readDeck(deckId);
@@ -20,10 +25,12 @@ export default function Deck({ deck, setDeck, isDeck, setIsDeck }) {
         loadDeck();
     }, [deckId, setDeck])
 
+    /* if the deck is loaded and its cards array length is greater than 0,
+    creates the elements displaying the deck's cards */
     if (deck?.cards?.length > 0) {
         cards = [
             <div>
-                    <h3>Cards</h3>
+                <h3>Cards</h3>
             </div>,
             <div>
                 <CardsList deckId={deckId} cards={deck.cards}/>

@@ -4,6 +4,7 @@ import StudyBtn from "../Buttons/StudyBtn";
 import DeleteBtn from "../Buttons/DeleteBtn";
 
 export default function DeckItem({ deck }) {
+    // creates the list item that displays deck information
     return (
         <li key={deck.id} className="card" >
             <div className="card-body">

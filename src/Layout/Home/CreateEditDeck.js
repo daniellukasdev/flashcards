@@ -5,6 +5,7 @@ import { readDeck } from "../../utils/api";
 
 
 export default function CreateEditDeck({ deck, setDeck, isDeck = true, edit = false }) {
+    /* if editing, loads the deck based on id from deck view */
     useEffect(() => {
         if (edit) {
             async function loadDeck() {
@@ -15,6 +16,8 @@ export default function CreateEditDeck({ deck, setDeck, isDeck = true, edit = fa
         }
     }, [deck.id, setDeck, edit])
  
+    /* if creating a deck, simply displays the following
+    with the appropriate header */
     return (
         <div>
             <div>

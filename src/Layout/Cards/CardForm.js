@@ -3,21 +3,27 @@ import { useHistory } from "react-router-dom";
 import { createCard, updateCard } from "../../utils/api";
 
 export default function CardForm({ card, deckId, edit = false }) {
+    /* creates states for card front and back */
     const [ cardFront, setcardFront ] = useState("");
     const [ cardBack, setCardBack ] = useState("");
     
     const history = useHistory();
 
+    /* sets the card front and back states to be
+    the current card's front and back, then updates
+    when the dependencies change */
     useEffect(() => {
         setcardFront(card.front);
         setCardBack(card.back);
     }, [card.front, card.back])
 
+    // creates an object to store data from inputs
     const newCard = {
         front: cardFront,
         back: cardBack,
     }
 
+    // if editing, creates an object to store data from current card
     const cardUpdate = {
         id: card.id,
         front: cardFront,
@@ -25,13 +31,18 @@ export default function CardForm({ card, deckId, edit = false }) {
         deckId: deckId
     }
     
+    // sends user back to deck view when they click cancel
     function handleDoneCancelBtn() {
         history.go(-1);
     }
 
+    /* handles change events for inputs and sets states accordingly */
     const handleFrontChange = (event) => setcardFront(event.target.value);
     const handleBackChange = (event) => setCardBack(event.target.value);
 
+    /* when submit is pressed passes new card and updated card
+    objects into the createCard() and updateCard() functions accordingly
+    depending on whether the user is creating a card or editing a current card */
     async function handleSaveSubmit(event) {
         event.preventDefault();
         if(!edit){
