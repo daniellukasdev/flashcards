@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Switch, Route, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { Switch, Route } from "react-router-dom";
 import Header from "./Header";
 import NotFound from "./NotFound";
 import Home from "./Home/Home";
@@ -13,10 +13,6 @@ function Layout() {
   // create state for decks
   const [ decks, setDecks ] = useState([]);
   const [ deck, setDeck ] = useState([])
-  const [ card, setCard ] = useState({});
-  // const [ isDeck, setIsDeck ] = useState(false);
-  // const params = useParams();
-  // console.log("params: ", params)
 
   return (
     <>
