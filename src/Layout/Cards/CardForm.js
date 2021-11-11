@@ -13,12 +13,6 @@ export default function CardForm({ card, deckId, edit = false }) {
         setCardBack(card.back);
     }, [card.front, card.back])
 
-    
-
-    // if (edit) {
-        //     setcardFront(card.front);
-        //     setCardBack(card.back);
-        // }
     const newCard = {
         front: cardFront,
         back: cardBack,
@@ -32,8 +26,7 @@ export default function CardForm({ card, deckId, edit = false }) {
     }
     
     function handleDoneCancelBtn() {
-        if (edit) history.go(-1);
-        history.push("/");
+        history.go(-1);
     }
 
     const handleFrontChange = (event) => setcardFront(event.target.value);
@@ -43,12 +36,15 @@ export default function CardForm({ card, deckId, edit = false }) {
         event.preventDefault();
         if(!edit){
             const response = await createCard(deckId, newCard);
+            console.log(response);
             setcardFront("");
             setCardBack("");
         } else {
             const response = await updateCard(cardUpdate);
+            console.log(response);
+            history.go(-1);
         }
-        history.push("/");
+        
     }
 
     return (

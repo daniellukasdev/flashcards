@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createDeck, updateDeck } from "../../utils/api";
 
-export default function DeckForm({ deck, deckName, setDeckName, description, setDescription,  edit  }) {
+export default function DeckForm({ deck, edit  }) {
+    const [ deckName, setDeckName ] = useState("");
+    const [ description, setDescription ] = useState("");
     const history = useHistory();
+
+    useEffect(() => {
+        if (edit) {
+            setDeckName(deck.name);
+            setDescription(deck.description);
+        }
+    }, [deck.name, deck.description, edit])
+
     const newDeck = {
         // id: (decks?.length + 1),
         name: deckName,
@@ -30,7 +40,7 @@ export default function DeckForm({ deck, deckName, setDeckName, description, set
             history.push(`/decks/${response.id}`);
         } else {
             const response = await updateDeck(deckUpdate);
-            history.go(-1);
+            history.push(`/decks/${response.id}`);
         }
     }
 
@@ -45,7 +55,7 @@ export default function DeckForm({ deck, deckName, setDeckName, description, set
                             name="deckName"
                             value={deckName}
                             onChange={handleInputChange}
-                            placeholder={edit ? `${deck.name}` : "Deck Name"}>
+                            placeholder={"Deck Name"}>
                         </input>
                     </div>
                     <div className="form-group">
@@ -57,7 +67,7 @@ export default function DeckForm({ deck, deckName, setDeckName, description, set
                             name="description"
                             value={description}
                             onChange={handleTextAreaChange}
-                            placeholder={edit ? `${deck.description}` : "Brief description of the deck"}>
+                            placeholder={"Brief description of the deck"}>
                         </textarea>
                     </div>
                     <div>

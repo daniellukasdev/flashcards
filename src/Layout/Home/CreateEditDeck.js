@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import NavBar from "./NavBar";
 import DeckForm from "../Decks/DeckForm";
+import { readDeck } from "../../utils/api";
 
 
 export default function CreateEditDeck({ deck, setDeck, isDeck = true, edit = false }) {
-    const [ deckName, setDeckName ] = useState("");
-    const [ description, setDescription ] = useState("");
+    useEffect(() => {
+        if (edit) {
+            async function loadDeck() {
+                const deckFromAPI = await readDeck(deck.id);
+                setDeck(deckFromAPI);
+            };
+            loadDeck();
+        }
+    }, [deck.id, setDeck, edit])
  
     return (
         <div>
             <div>
                 <NavBar 
-                rootName={edit ? "Edit Deck" : "Create Deck"} 
+                rootName={edit ? `${deck.name}` : "Create Deck"} 
+                edit={edit}
                 deck={deck} 
                 setDeck={setDeck} 
                 isDeck={isDeck} 
@@ -23,10 +32,6 @@ export default function CreateEditDeck({ deck, setDeck, isDeck = true, edit = fa
             <div>
                 <DeckForm 
                 deck={deck} 
-                deckName={deckName} 
-                setDeckName={setDeckName}
-                description={description}
-                setDescription={setDescription} 
                 edit={edit}
 
                 />

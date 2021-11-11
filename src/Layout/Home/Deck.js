@@ -50,7 +50,7 @@ export default function Deck({ deck, setDeck, isDeck, setIsDeck }) {
                         <AddCardsBtn deckId={deck.id} />
                     </div>
                     <div className="d-flex">
-                        <DeleteBtn />
+                        <DeleteBtn id={deck.id} isDeck={true} deckView={true} />
                     </div>
                 </div>
             </div>

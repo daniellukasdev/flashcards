@@ -27,7 +27,7 @@ export default function DeckItem({ deck }) {
                         <StudyBtn deckId={deck.id} />
                     </div>
                     <div className="d-flex">
-                        <DeleteBtn deckId={deck.id} />
+                        <DeleteBtn id={deck.id} isDeck={true} />
                     </div>
                 </div>
             </div>

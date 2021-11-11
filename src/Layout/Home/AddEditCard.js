@@ -4,7 +4,7 @@ import NavBar from "./NavBar";
 import CardForm from "../Cards/CardForm";
 import { readDeck, readCard } from "../../utils/api";
 
-export default function AddEditCard({ deck, setDeck, isDeck = true , edit = false }) {
+export default function AddEditCard({ deck, setDeck, edit = false }) {
     const [ card, setCard ] = useState({});
     const { deckId, cardId } = useParams();
     const params = useParams();
@@ -33,9 +33,10 @@ export default function AddEditCard({ deck, setDeck, isDeck = true , edit = fals
             <div>
                 <NavBar 
                 rootName={`${deck?.name}`} 
+                isCard={true} 
+                edit={edit}
                 deck={deck} 
                 setDeck={setDeck} 
-                isDeck={isDeck} 
                 />
             </div>
             <div>

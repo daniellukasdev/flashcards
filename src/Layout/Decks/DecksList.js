@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import DeckItem from "./DeckItem";
 
 export default function DecksList({ decks }) {
