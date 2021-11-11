@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import NavBar from "./NavBar";
-import { readDeck, createCard, updateCard } from "../../utils/api";
+import { readDeck, readCard, createCard, updateCard } from "../../utils/api";
 
 export default function AddEditCard({ deckId, deck, setDeck, isDeck = true , edit = false }) {
     const [ card, setCard ] = useState({});
     const [ cardFront, setcardFront ] = useState("");
     const [ cardBack, setCardBack ] = useState("");
-    //const { deckId } = useParams();
-    //console.log("params from Add: ", deckId)
+    const { cardId } = useParams();
+    const params = useParams();
+    console.log("params from Add: ", params)
     const history = useHistory();
 
     useEffect(() => {
@@ -19,6 +20,19 @@ export default function AddEditCard({ deckId, deck, setDeck, isDeck = true , edi
         loadDeck();
     }, [deckId, setDeck])
 
+    useEffect(() => {
+        async function loadCard() {
+            const cardFromAPI = await readCard(cardId);
+            setCard(cardFromAPI);
+        };
+        loadCard();
+        
+    }, [cardId])
+
+    // if (edit) {
+        //     setcardFront(card.front);
+        //     setCardBack(card.back);
+        // }
     const newCard = {
         front: cardFront,
         back: cardBack,
@@ -30,7 +44,7 @@ export default function AddEditCard({ deckId, deck, setDeck, isDeck = true , edi
         back: cardBack,
     }
     
-    function handleDoneBtn() {
+    function handleDoneCancelBtn() {
         if (edit) history.go(-1);
         history.push("/");
     }
@@ -38,12 +52,13 @@ export default function AddEditCard({ deckId, deck, setDeck, isDeck = true , edi
     const handleFrontChange = (event) => setcardFront(event.target.value);
     const handleBackChange = (event) => setCardBack(event.target.value);
 
-    async function handleSave(event) {
+    async function handleSaveSubmit(event) {
         event.preventDefault();
         if(!edit){
             const response = await createCard(deckId, newCard);
             setcardFront("");
             setCardBack("");
+            history.push("/");
         } else {
             const response = await updateCard(cardUpdate);
         }
@@ -63,7 +78,7 @@ export default function AddEditCard({ deckId, deck, setDeck, isDeck = true , edi
                 <h2>{edit ? `${deck.name}: Edit Card` : `${deck.name}: Add Card`}</h2>
             </div>
             <div>
-                <form onSubmit={handleSave}>
+                <form onSubmit={handleSaveSubmit}>
                     <div className="form-group">
                         <label for="cardFront">Front</label>
                         <textarea 
@@ -73,7 +88,7 @@ export default function AddEditCard({ deckId, deck, setDeck, isDeck = true , edi
                             name="cardFront"
                             value={cardFront}
                             onChange={handleFrontChange}
-                            placeholder={edit ? `${card.front}` : "Front side of card"}>
+                            placeholder="Front side of card">
                         </textarea>
                     </div>
                     <div className="form-group">
@@ -81,19 +96,19 @@ export default function AddEditCard({ deckId, deck, setDeck, isDeck = true , edi
                         <textarea 
                             className="form-control" 
                             id="cardBack" 
-                            rows="4"
+                            rows="3"
                             name="cardBack"
                             value={cardBack}
                             onChange={handleBackChange}
-                            placeholder={edit ? `${card.back}` : "Back side of card"}>
+                            placeholder="Back side of card">
                         </textarea>
                     </div>
                     <div>
                         <button onClick={(event) => {
                             event.preventDefault();
-                            handleDoneBtn();
-                        }}className="btn btn-secondary mr-1">Done</button>
-                        <button type="submit" className="btn btn-primary ml-1">Save</button>
+                            handleDoneCancelBtn();
+                        }}className="btn btn-secondary mr-1">{edit ? "Cancel" : "Done"}</button>
+                        <button type="submit" className="btn btn-primary ml-1">{edit ? "Submit" : "Save"}</button>
                     </div>
                 </form>
             </div>

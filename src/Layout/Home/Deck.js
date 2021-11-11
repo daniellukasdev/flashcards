@@ -26,7 +26,7 @@ export default function Deck({ deck, setDeck, isDeck, setIsDeck }) {
                     <h3>Cards</h3>
             </div>,
             <div>
-                <CardsList cards={deck.cards}/>
+                <CardsList deckId={deckId} cards={deck.cards}/>
             </div>,
         ]
     }

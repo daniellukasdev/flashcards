@@ -3,7 +3,7 @@ import { useRouteMatch, useParams } from "react-router-dom";
 import DeleteBtn from "../Buttons/DeleteBtn";
 import EditBtn from "../Buttons/EditBtn";
 
-export default function CardItem({ card }) {
+export default function CardItem({ deckId,card }) {
     const url = useRouteMatch();
 
     console.log(`URL ${url}/${card.id}/study`)
@@ -21,7 +21,7 @@ export default function CardItem({ card }) {
                 </div>
                 <div className="d-flex flex-row justify-content-end">
                     <div className="d-flex">
-                        <EditBtn />
+                        <EditBtn deckId={deckId} cardId={card.id}/>
                         <DeleteBtn cardId={card.id} />
                     </div>
                 </div>
