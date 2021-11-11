@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 
 export default function NavBar({ rootName, edit = false, isCard = false, study=false }) {
     const { deckId } = useParams();
-    console.log("params in nav: ", deckId)
 
     let navItems = <li className="breadcrumb-item"><Link></Link></li>
     if (study) {

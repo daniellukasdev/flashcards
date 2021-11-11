@@ -15,16 +15,16 @@ export default function DeckForm({ deck, edit  }) {
     }, [deck.name, deck.description, edit])
 
     const newDeck = {
-        // id: (decks?.length + 1),
         name: deckName,
         description: description,
-    }
+    };
 
     const deckUpdate = {
         id: deck.id,
         name: deckName,
         description: description,
-    }
+    };
+    
     function handleCancelBtn() {
         if (edit) history.go(-1);
         history.push("/");

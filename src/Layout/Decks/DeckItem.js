@@ -1,15 +1,9 @@
 import React from "react";
-import { Link, useRouteMatch, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import StudyBtn from "../Buttons/StudyBtn";
 import DeleteBtn from "../Buttons/DeleteBtn";
 
 export default function DeckItem({ deck }) {
-    const url = useRouteMatch();
-
-    console.log(`URL ${url}/${deck.id}/study`)
-    const params = useParams();
-    console.log("params: ", params)
-    
     return (
         <li key={deck.id} className="card" >
             <div className="card-body">

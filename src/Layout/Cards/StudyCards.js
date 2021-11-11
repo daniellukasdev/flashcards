@@ -1,21 +1,11 @@
 import React, { useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 //import NotEnoughCards from "./NotEnoughCards";
 
 export default function StudyCards({ cards = [], deck }) {
     const [ currentCard, setCurrentCard ] = useState(0);
     const [ cardFront, setCardFront ] = useState(true)
     const history = useHistory();
-
-    //const { deckId } = useParams();
-    //console.log("params: ", deckId)
-
-    // if there are two or fewer cards, display the following instead
-    // if (cards.length <= 2) {
-    //     return (
-    //         <NotEnoughCards deckId={deckId} cards={cards} deck={deck} />
-    //     );
-    // }
 
     function flipBtnHandler(event) {
         //event.preventDefault();

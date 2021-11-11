@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { readDeck } from "../../utils/api";
 import NavBar from "./NavBar";
@@ -7,9 +7,7 @@ import NotEnoughCards from "../Cards/NotEnoughCards";
 
 
 export default function Study({ deck, setDeck, isDeck = true }) {
-    // setIsDeck(true);
     const { deckId } = useParams();
-    //console.log("params deckId: ", deckId)
 
     useEffect(() => {
         async function loadDeck() {
@@ -18,10 +16,6 @@ export default function Study({ deck, setDeck, isDeck = true }) {
         };
         loadDeck();
     }, [deckId, setDeck])
-    
-    
-    // const cards = deck.cards.map(card => card);
-    // console.log("Cards: ", cards)
 
     return (
         <div>

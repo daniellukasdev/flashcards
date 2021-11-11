@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { listDecks } from "../../utils/api";
 import DecksList from "../Decks/DecksList";
@@ -15,7 +15,6 @@ export default function Home({ decks, setDecks }) {
         
     }, [setDecks])
 
-    //console.log(decks)
     return (
         <div>
             <Link to="/decks/new" className="btn btn-secondary mb-2">

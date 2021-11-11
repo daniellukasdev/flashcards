@@ -2,7 +2,6 @@ import React from "react";
 import AddCardsBtn from "../Buttons/AddCardsBtn";
 
 export default function NotEnoughCards( { cards = [], deck = [] }) {
-    console.log("deck: ", deck)
     return (
         <div>
             <div>

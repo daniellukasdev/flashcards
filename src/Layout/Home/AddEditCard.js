@@ -7,8 +7,6 @@ import { readDeck, readCard } from "../../utils/api";
 export default function AddEditCard({ deck, setDeck, edit = false }) {
     const [ card, setCard ] = useState({});
     const { deckId, cardId } = useParams();
-    const params = useParams();
-    console.log("params from Add: ", params)
 
     useEffect(() => {
         async function loadDeck() {
