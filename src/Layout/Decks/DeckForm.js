@@ -62,7 +62,7 @@ export default function DeckForm({ deck, edit  }) {
     return (
         <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label for="deckName">Name</label>
+                        <label htmlfor="deckName">Name</label>
                         <input 
                             type="text" 
                             className="form-control" 
@@ -74,7 +74,7 @@ export default function DeckForm({ deck, edit  }) {
                         </input>
                     </div>
                     <div className="form-group">
-                        <label for="description">Description</label>
+                        <label htmlfor="description">Description</label>
                         <textarea 
                             className="form-control" 
                             id="description" 

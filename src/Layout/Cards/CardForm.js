@@ -61,7 +61,7 @@ export default function CardForm({ card, deckId, edit = false }) {
     return (
         <form onSubmit={handleSaveSubmit}>
                     <div className="form-group">
-                        <label for="cardFront">Front</label>
+                        <label htmlfor="cardFront">Front</label>
                         <textarea 
                             type="text" 
                             className="form-control" 
@@ -74,7 +74,7 @@ export default function CardForm({ card, deckId, edit = false }) {
                         </textarea>
                     </div>
                     <div className="form-group">
-                        <label for="cardBack">Back</label>
+                        <label htmlfor="cardBack">Back</label>
                         <textarea 
                             className="form-control" 
                             id="cardBack" 
