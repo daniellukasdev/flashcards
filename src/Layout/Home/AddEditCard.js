@@ -36,7 +36,8 @@ export default function AddEditCard({ deck, setDeck, edit = false }) {
             <div>
                 <NavBar 
                 rootName={`${deck?.name}`} 
-                isCard={true} 
+                isCard={true}
+                cardId={cardId} 
                 edit={edit}
                 deck={deck} 
                 setDeck={setDeck} 

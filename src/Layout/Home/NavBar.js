@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 
-export default function NavBar({ rootName, edit = false, isCard = false, study=false }) {
+export default function NavBar({ rootName, edit = false, isCard = false, cardId, study=false }) {
     // gets the deck id from url params
     const { deckId } = useParams();
 
@@ -13,19 +13,25 @@ export default function NavBar({ rootName, edit = false, isCard = false, study=f
         navItems = [
         <li className="breadcrumb-item"><Link to={`/decks/${deckId}`}>{`${rootName}`}</Link></li>,
         <li className="breadcrumb-item active" aria-current="page">Study</li>
-        ]
-    } else if (!edit && isCard) {
+        ];
+    } else if (edit && isCard) {
         /* if editing a card, displays the following */
         navItems = [
             <li className="breadcrumb-item"><Link to={`/decks/${deckId}`}>{`${rootName}`}</Link></li>,
+            <li className="breadcrumb-item active" aria-current="page">Edit Card {cardId}</li>
+            ];
+    } else if (!edit && isCard) {
+        /* if not editing a card, displays the following */
+        navItems = [
+            <li className="breadcrumb-item"><Link to={`/decks/${deckId}`}>{`${rootName}`}</Link></li>,
             <li className="breadcrumb-item active" aria-current="page">Add Card</li>
-            ]
+            ];
     } else if (edit && !isCard) {
         /* if editing a deck, displays the following */
         navItems = [
             <li className="breadcrumb-item"><Link to={`/decks/${deckId}`}>{`${rootName}`}</Link></li>,
             <li className="breadcrumb-item active" aria-current="page">Edit Deck</li>
-            ]
+            ];
     } else {
         /* in all other pages, displays the following */
         navItems = <li className="breadcrumb-item active" aria-current="page">{`${rootName}`}</li>
